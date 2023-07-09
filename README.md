@@ -1,6 +1,6 @@
 #### This project is for the Devops bootcamp exercise for
 
-#### "Cloud Basics"
+#### "BUILD AUTOMATION & CI/CD WITH JENKINS"
 
 ##### Test
 The project uses jest library for tests. (see "test" script in package.json)
