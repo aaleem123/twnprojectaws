@@ -1,6 +1,6 @@
-#### This project is for the Devops bootcamp exercise for
+#### This project is for the DevOps bootcamp exercise for
 
-#### "BUILD AUTOMATION & CI/CD WITH JENKINS"
+#### "Build Automation with Jenkins"
 
 ##### Test
 The project uses jest library for tests. (see "test" script in package.json)
