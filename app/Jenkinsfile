@@ -4,7 +4,8 @@ pipeline {
     environment {
         DOCKER_IMAGE = 'aaleem1993/twnprojectjenkins'      
         DOCKER_CREDENTIALS_ID = 'docker-hub-creds'         
-        GIT_CREDENTIALS_ID = 'git-ssh'                     
+        GIT_CREDENTIALS_ID = 'git-ssh' 
+        GIT_SSH_COMMAND = "ssh -o StrictHostKeyChecking=no"
     }
 
     stages {
