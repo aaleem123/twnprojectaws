@@ -20,3 +20,5 @@ Screenshots Below
 
 ![Screenshot 2025-06-21 120259](https://github.com/user-attachments/assets/7d1a5b15-9608-41ba-a008-8bd688ea514a)
 
+Note:
+Since the app is smaller, I kept the structure flat to keep things simple. I'm focused right now on mastering infrastructure and CI/CD. The folders structure like src/ or app/ i am familiar with :)
