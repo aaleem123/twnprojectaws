@@ -31,11 +31,7 @@ pipeline {
 
         stage('Build Docker Image') {
             steps {
-                script {
-                    def version = sh(script: "node -p \"require('./package.json').version\"", returnStdout: true).trim()
-                    env.IMAGE_TAG = "${DOCKER_IMAGE}:${version}"
-                    sh "docker build -t ${env.IMAGE_TAG} ."
-                }
+               sh 'docker build -t ${DOCKER_IMAGE}:latest .'
             }
         }
 
@@ -48,7 +44,7 @@ pipeline {
                 )]) {
                     sh '''
                         echo "$DOCKER_PASS" | docker login -u "$DOCKER_USER" --password-stdin
-                        docker push ${IMAGE_TAG}
+                        docker push ${DOCKER_IMAGE}:$latest
                     '''
                 }
             }
@@ -61,7 +57,7 @@ pipeline {
                         git config user.name "aaleem123"
                         git config user.email "attiaaleem@gmail.com"
                         git add package.json package-lock.json
-                        git commit -m "chore: bump version [ci skip]" || echo "Nothing to commit"
+                        git commit -m "version bump" 
                         git push origin HEAD:main
                     '''
                 }
@@ -73,7 +69,7 @@ pipeline {
                 sshagent (credentials: [EC2_SSH_CREDENTIALS_ID]) {
                     sh '''
                         ssh -o StrictHostKeyChecking=no $EC2_HOST '
-                            docker pull ${IMAGE_TAG} &&
+                            docker pull ${DOCKER_IMAGE}:$version &&
                             docker stop myapp || true &&
                             docker rm myapp || true &&
                             docker run -d --name myapp -p 3000:3000 ${IMAGE_TAG}
