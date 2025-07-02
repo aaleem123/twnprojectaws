@@ -9,7 +9,7 @@
 - 🚀 Infrastructure built entirely with AWS CLI commands
 - 🔒 IAM user with custom policy for secure, minimal permissions
 - 🐳 Dockerized Node.js application running on EC2
-- 🤖 Jenkins CI/CD pipeline automating the build, push, versioning and deployment process
+- 🤖 Jenkins CI/CD pipeline automating the build, push & deployment process
 
 **⚙️ Prerequisites**
 - ✅ AWS CLI configured with proper credentials
