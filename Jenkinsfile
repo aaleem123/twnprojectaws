@@ -17,12 +17,6 @@ pipeline {
             }
         }
 
-        stage('Increment Version') {
-            steps {
-                sh 'npm version minor --no-git-tag-version'
-            }
-        }
-
         stage('Run Tests') {
             steps {
                 sh 'npm test'
@@ -50,26 +44,12 @@ pipeline {
             }
         }
 
-        stage('Commit Version Bump to GitHub') {
-            steps {
-                sshagent (credentials: [GIT_CREDENTIALS_ID]) {
-                    sh '''
-                        git config user.name "aaleem123"
-                        git config user.email "attiaaleem@gmail.com"
-                        git add package.json package-lock.json
-                        git commit -m "version bump" 
-                        git push origin HEAD:main
-                    '''
-                }
-            }
-        }
-
         stage('Deploy to EC2') {
             steps {
                 sshagent (credentials: [EC2_SSH_CREDENTIALS_ID]) {
                     sh '''
                         ssh -o StrictHostKeyChecking=no $EC2_HOST '
-                            docker pull ${DOCKER_IMAGE}:$version &&
+                            docker pull ${DOCKER_IMAGE}:latest &&
                             docker stop myapp || true &&
                             docker rm myapp || true &&
                             docker run -d --name myapp -p 3000:3000 ${IMAGE_TAG}
